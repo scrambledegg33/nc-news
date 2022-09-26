@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
-import {Header} from './components/Header';
-import {Navbar} from './components/NavBar';
-import {ArticlesList} from './components/ArticlesList';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+import ArticlesList from './components/ArticlesList';
+import LoginStatus from './components/LoginStatus';
+import StaticPage from './components/Home';
+import UsersList from './components/UsersList';
+import Article from './components/Article';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   
   
   return (
+    <BrowserRouter>
     <div className="App">
-    <Header />
-    <Navbar />
+     <Header />
+    <NavBar /> 
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/articles" element={<ArticlesList />} />
-      <Route path="/articles/:article_id" element={<Article />} /> 
-      <Route path="/users" element={<SellItem />} />
-    </Routes>
+       <Route path="/" element={<StaticPage />} />
+      <Route path="/articles" element={<ArticlesList />} /> 
+       <Route path="/articles/:article_id" element={<Article />} /> 
+      <Route path="/users" element={<UsersList />} /> 
+    </Routes> 
+    <footer>
+     <LoginStatus /> 
+    </footer>
   </div>
+  </BrowserRouter>
   );
 }
 

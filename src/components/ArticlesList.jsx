@@ -8,29 +8,24 @@ const [articles, setArticles] = useState([]);
 const [topic, setTopic] = useState("");
 
 useEffect(() => {
-    fetch(`https://news-app-backend123.herokuapp.com/api/topics/?slug=${topic}`).then((response) => {
+    fetch(`https://news-app-backend123.herokuapp.com/api/articles?topic=${topic}`).then((response) => {
         return response.json()
     })
     .then((data) => {
-        
-        setTopic(data.topics)
+        console.log(data);
+        setArticles(data.articles)
+
     })
 }, [topic])
 
-
-
-console.log(topics)
-
-
-
-
-    return (
+ return (
       <div>
       <h1>Articles List</h1>
-      <h3>Click Button to Filter by Topic</h3>
-      <button onClick={() => setTopic("coding") }>Coding</button>
-      <button onClick={() => setTopic("football") }>Football</button>
-      <button onClick={() => setTopic("cooking") }>Cooking</button>
+      
+       <h3>Click Button to Filter by Topic</h3>
+      <button onClick={() => setTopic('coding') }>Coding</button>
+      <button onClick={() => setTopic('football') }>Football</button>
+      <button onClick={() => setTopic('cooking') }>Cooking</button>
       <button onClick={() => setTopic("") }>All Topics</button>
       
           
@@ -42,13 +37,13 @@ console.log(topics)
         <h3>Article Author: {article.author}</h3>
         <h3>Topic: {article.topic}</h3>
         <h3>Votes: {article.votes}</h3>
-        <h3>Comments: {article.comments}</h3>
+        <h3>Comments: {article.comment_count}</h3>
         <Link key={article.article_id} to={`/articles/${article.article_id}`}><button>Select</button></Link>
         </li>
         )
         })}
       </ul>
-      </div>
+    </div>
 
     );
   };
