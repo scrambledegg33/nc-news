@@ -1,3 +1,4 @@
+import {useContext} from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
@@ -8,9 +9,10 @@ import StaticPage from './components/Home';
 import UsersList from './components/UsersList';
 import Article from './components/Article';
 import { BrowserRouter } from 'react-router-dom';
+import { UserContext } from './contexts/User';
 
 function App() {
-  
+  //const value = useContext(UserContext);
   
   return (
     <BrowserRouter>
@@ -22,6 +24,7 @@ function App() {
       <Route path="/articles" element={<ArticlesList />} /> 
        <Route path="/articles/:article_id" element={<Article />} /> 
       <Route path="/users" element={<UsersList />} /> 
+      <Route path="/articles/topics/:topic" element={<ArticlesList />} />
     </Routes> 
     <footer>
      <LoginStatus /> 

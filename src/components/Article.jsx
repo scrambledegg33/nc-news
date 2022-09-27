@@ -6,7 +6,7 @@ export default function Article() {
     const [currArticle, setCurrArticle] = useState({});
 
     useEffect(() => {
-        fetch(`https://northcoders-marketplace-333.herokuapp.com/api/articles/${article_id}`)
+        fetch(`https://news-app-backend123.herokuapp.com/api/articles/${article_id}`)
         .then((response) => {
             return response.json();
         })
@@ -15,9 +15,12 @@ export default function Article() {
         });
     }, [article_id]);
 
+console.log(currArticle)
     return (
         <div>
-            <h2>Title: {currArticle.title}, Article ID: {currArticle.article_id}</h2>
+            <h2>Title: {currArticle.title}</h2>
+            <p>{currArticle.body}</p>
+            <p> Article ID: {currArticle.article_id}</p>
             <p>Author: {currArticle.author}</p>
             <p>Topic: {currArticle.topic}</p>
             <p>Votes: {currArticle.votes}</p>
