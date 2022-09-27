@@ -19,3 +19,12 @@ export const getUsers = () => {
         return res.data;
     })
 }
+
+export const getTopics = () => {
+    return newsApi
+    .get("/topics")
+    .then((res) => {
+        return res.data;
+    })
+}
+

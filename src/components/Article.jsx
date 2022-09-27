@@ -15,9 +15,10 @@ export default function Article() {
         });
     }, [article_id]);
 
+
     return (
         <div>
-            <h2>Title: {currArticle.title}, Article ID: {currArticle.article_id}</h2>
+            <h2>Article ID: {currArticle.article_id}</h2>
             <p>Author: {currArticle.author}</p>
             <p>Topic: {currArticle.topic}</p>
             <p>Votes: {currArticle.votes}</p>

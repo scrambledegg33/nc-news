@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState} from "react";
+import { Link, useParams } from "react-router-dom";
 
 
 const ArticlesList = () => {
 
 const [articles, setArticles] = useState([]);
-const [topic, setTopic] = useState("");
+const { topic } = useParams();
 
 useEffect(() => {
     fetch(`https://news-app-backend123.herokuapp.com/api/articles?topic=${topic}`).then((response) => {
@@ -21,14 +21,8 @@ useEffect(() => {
  return (
       <div>
       <h1>Articles List</h1>
-      
-       <h3>Click Button to Filter by Topic</h3>
-      <button onClick={() => setTopic('coding') }>Coding</button>
-      <button onClick={() => setTopic('football') }>Football</button>
-      <button onClick={() => setTopic('cooking') }>Cooking</button>
-      <button onClick={() => setTopic("") }>All Topics</button>
-      
-          
+    
+    
       <ul>
         {articles.map((article) => {
         return (
