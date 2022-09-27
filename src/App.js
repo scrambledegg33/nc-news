@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+import ArticlesList from './components/ArticlesList';
+import LoginStatus from './components/LoginStatus';
+import StaticPage from './components/Home';
+import UsersList from './components/UsersList';
+import Article from './components/Article';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
+  
+  
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <Header />
+    <NavBar /> 
+    <Routes>
+       <Route path="/" element={<StaticPage />} />
+      <Route path="/articles" element={<ArticlesList />} /> 
+       <Route path="/articles/:article_id" element={<Article />} /> 
+      <Route path="/users" element={<UsersList />} /> 
+    </Routes> 
+    <footer>
+     <LoginStatus /> 
+    </footer>
+  </div>
+  </BrowserRouter>
   );
 }
 
