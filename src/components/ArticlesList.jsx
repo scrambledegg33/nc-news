@@ -1,5 +1,6 @@
 import { useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
+import axios from 'axios'
 
 
 const ArticlesList = () => {
@@ -8,15 +9,13 @@ const [articles, setArticles] = useState([]);
 const { topic } = useParams();
 
 useEffect(() => {
-    fetch(`https://news-app-backend123.herokuapp.com/api/articles?topic=${topic}`).then((response) => {
-        return response.json()
+    axios.get(`https://news-app-backend123.herokuapp.com/api/articles`, {params: {topic}}).then(({data}) => {
+      console.log(data)
+        setArticles(data.articles);
     })
-    .then((data) => {
-        console.log(data);
-        setArticles(data.articles)
-
-    })
+   
 }, [topic])
+
 
  return (
       <div>
