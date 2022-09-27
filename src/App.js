@@ -1,3 +1,4 @@
+import {useContext} from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
@@ -8,9 +9,10 @@ import StaticPage from './components/Home';
 import UsersList from './components/UsersList';
 import Article from './components/Article';
 import { BrowserRouter } from 'react-router-dom';
+import { UserContext } from './contexts/User';
 
 function App() {
-  
+  //const value = useContext(UserContext);
   
   return (
     <BrowserRouter>

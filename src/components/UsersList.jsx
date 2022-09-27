@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import {UserContext} from '../contexts/User';
+import { getUsers } from '../utils/api';
 
 const UsersList = () => {
 
