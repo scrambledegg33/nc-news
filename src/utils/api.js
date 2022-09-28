@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const newsApi = axios.create({
     baseURL: "https://news-app-backend123.herokuapp.com/api"
 })
@@ -23,6 +24,15 @@ export const getUsers = () => {
 export const getTopics = () => {
     return newsApi
     .get("/topics")
+    .then((res) => {
+        return res.data;
+    })
+}
+
+export const patchArticles =(articleId, vote) => {
+    return newsApi
+
+    .patch(`/articles/${articleId}`, {votes: vote})
     .then((res) => {
         return res.data;
     })
