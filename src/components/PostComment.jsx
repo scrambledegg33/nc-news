@@ -1,72 +1,39 @@
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {  postComment, getCommentsById } from '../utils/api';
-import username from './LoginStatus';
 
 
 export default function PostComment() {
-    const [author, setAuthor] = useState("");
+    const [author, setAuthor] = useState("tickle122");
     const [body , setBody] = useState("")
     const {article_id} = useParams();
-    const [pass, setPass] = useState("");
-    const password = "swordfish"
-
-    const handleAuthor = (event) => {
-      const value = event.target.value;
-      setAuthor(value)
-     }
+    const [toggle, setToggle] = useState(false)
+    
+   
 
     const handleBody = (event) => {
       const value = event.target.value;
+      console.log(value)
       setBody(value)
      }
-
-    const handlePassword = (event) => {
-      const value = event.target.value;
-      setPass(value)
-     }
-    
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      if (pass == password){
-      postComment(article_id, author, body).then((res) => {
-        console.log(res)
-        return res;
-      })
-    } else{
-        alert("incorrect password")
-    }
 
-    }
-      
+      postComment(article_id, author, body).then((res) => { 
+          return res;
+        })
+        setToggle(true)
     
+    } 
+
     
-      
-    
-  
     return (
         <div>
             <br></br>
             <br></br>
       <form onSubmit={handleSubmit}>
-        <label>Enter your username:
-        <input 
-          type="text" 
-          name="author" 
-          value={author} 
-          onChange={handleAuthor}
-        />
-        </label>
         <br></br>
-        <label>Enter your password:
-        <input 
-          type="password" 
-          name="password" 
-          value={pass} 
-          onChange={handlePassword}
-        />
-        </label>
         <br></br>
         <br></br>
         <label>Enter your comment:
@@ -80,8 +47,9 @@ export default function PostComment() {
           </label>
           <br></br>
           <br></br>
-          <input type="submit" />
+          <input type="submit" value="Submit"/>
       </form>
+      {toggle && <p>comment posted</p>}
       </div>
     )
 }
