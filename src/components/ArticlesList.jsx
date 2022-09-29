@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios'
 
@@ -13,7 +13,7 @@ const { topic } = useParams();
 
 useEffect(() => {
     axios.get(`https://news-app-backend123.herokuapp.com/api/articles`, {params: {topic}}).then(({data}) => {
-      console.log(data)
+      
         setArticles(data.articles);
     })
    
