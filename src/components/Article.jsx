@@ -51,8 +51,8 @@ console.log(currArticle)
             <p>Topic: {currArticle.topic}</p>
             <p>Comment Count: {currArticle.comment_count}</p>
             <p>Votes: {currArticle.votes}</p>
-            <button onClick={() => handleVote(article_id, 1)}>upVote</button>
-            <button onClick={() => handleVote(article_id, -1)}>downVote</button>
+            <button onClick={() => handleVote(article_id, 1)}className="greenButton">upVote</button>
+            <button onClick={() => handleVote(article_id, -1)} className="redButton">downVote</button>
         </div>
     )
 }
