@@ -1,12 +1,15 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState, useContext} from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios'
 
 
-const ArticlesList = () => {
+
+const ArticlesList = (props) => {
 
 const [articles, setArticles] = useState([]);
 const { topic } = useParams();
+
+
 
 useEffect(() => {
     axios.get(`https://news-app-backend123.herokuapp.com/api/articles`, {params: {topic}}).then(({data}) => {
@@ -15,7 +18,6 @@ useEffect(() => {
     })
    
 }, [topic])
-
 
  return (
       <div>
@@ -29,8 +31,8 @@ useEffect(() => {
         <h2>Article Title: {article.title}</h2>
         <h3>Article Author: {article.author}</h3>
         <h3>Topic: {article.topic}</h3>
-        <h3>Votes: {article.votes}</h3>
         <h3>Comments: {article.comment_count}</h3>
+        <h3>Votes: {article.votes}</h3>
         <Link key={article.article_id} to={`/articles/${article.article_id}`}><button>Select</button></Link>
         </li>
         )
