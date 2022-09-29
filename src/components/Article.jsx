@@ -1,6 +1,6 @@
 import {useEffect, useState, useContext} from 'react';
 import {useParams} from 'react-router-dom';
-import { patchArticles } from '../utils/api';
+import { getArticlesById, patchArticles } from '../utils/api';
 
 export default function Article() {
     const {article_id} = useParams();
@@ -9,9 +9,9 @@ export default function Article() {
     
     
     useEffect(() => {
-        fetch(`https://news-app-backend123.herokuapp.com/api/articles/${article_id}`)
+        getArticlesById(article_id)
         .then((response) => {
-            return response.json();
+            return response;
         })
         .then((data) => {
             setCurrArticle(data.article);
@@ -20,16 +20,12 @@ export default function Article() {
     }, [article_id]);
 
     const handleVote = (article_id, vote) => {
-        if(vote === 1){
-            setCurrArticle({...currArticle, votes: currArticle.votes + 1})
-        }
-        if (vote === -1){
-        setCurrArticle({...currArticle, votes: currArticle.votes - 1})
-        }
+            setCurrArticle({...currArticle, votes: currArticle.votes + vote})
+       
        patchArticles(article_id, vote)
        .then((res) => {
 
-           currArticle.votes = (res.article.votes)
+           return res;
 })
    }
     
@@ -39,9 +35,6 @@ export default function Article() {
         return <p>Loading...</p>
     }
 
-    
-   
-console.log(currArticle)
     return (
         <div>
             <h2>Title: {currArticle.title}</h2>

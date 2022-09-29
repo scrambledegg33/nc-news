@@ -13,6 +13,14 @@ export const getArticles = () => {
     })
 }
 
+export const getArticlesById = (article_id) => {
+    return newsApi
+    .get(`/articles/${article_id}`)
+    .then((res) => {
+        return res.data;
+    })
+}
+
 export const getUsers = () => {
     return newsApi
     .get("/users")
