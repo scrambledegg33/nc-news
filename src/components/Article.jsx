@@ -1,5 +1,5 @@
-import {useEffect, useState, useContext} from 'react';
-import {useParams} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useParams, Link} from 'react-router-dom';
 import { getArticlesById, patchArticles } from '../utils/api';
 import CommentsList from './CommentsList';
 
@@ -47,6 +47,7 @@ export default function Article() {
             <p>Votes: {currArticle.votes}</p>
             <button onClick={() => handleVote(article_id, 1)}className="greenButton">upVote</button>
             <button onClick={() => handleVote(article_id, -1)} className="redButton">downVote</button>
+            <Link key={currArticle.article_id} to={`/articles/${currArticle.article_id}/comments/addComment`}><button>Add Comment</button></Link>
             < CommentsList />
         </div>
     )

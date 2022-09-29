@@ -1,15 +1,12 @@
-import {useContext} from 'react';
-import {UserContext} from '../contexts/User';
-
 
 const LoginStatus = () => {
-//const {loggedInUser} = useContext(UserContext);
 
+const username = "tickle122"
 
     return (
         <footer>
                
-            <p>Logged in as: tickle122</p>
+            <p>Logged in as: {username}</p>
             
         </footer>
 
