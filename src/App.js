@@ -9,7 +9,7 @@ import StaticPage from './components/Home';
 import UsersList from './components/UsersList';
 import Article from './components/Article';
 import { BrowserRouter } from 'react-router-dom';
-import { UserContext } from './contexts/User';
+import PostComment from './components/PostComment';
 
 function App() {
   //const value = useContext(UserContext);
@@ -25,6 +25,7 @@ function App() {
        <Route path="/articles/:article_id" element={<Article/>} /> 
       <Route path="/users" element={<UsersList />} /> 
       <Route path="/articles/topics/:topic" element={<ArticlesList />} />
+      <Route path="/articles/:article_id/comments/addComment" element={<PostComment />} />
     </Routes> 
     <footer>
      <LoginStatus /> 

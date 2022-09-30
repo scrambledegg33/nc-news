@@ -24,7 +24,7 @@ useEffect(() => {
       <h1>Articles List</h1>
     
     
-      <ul>
+      <ul id="otis">
         {articles.map((article) => {
         return (
             <li key={article.article_id}>

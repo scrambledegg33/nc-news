@@ -1,12 +1,15 @@
-import {useEffect, useState, useContext} from 'react';
-import {useParams} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useParams, Link} from 'react-router-dom';
 import { getArticlesById, patchArticles } from '../utils/api';
 import CommentsList from './CommentsList';
+import PostComment from './PostComment';
 
 export default function Article() {
     const {article_id} = useParams();
     const [currArticle, setCurrArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [toggle, setToggle] = useState(false)
+    const [comments, setComments] = useState([]);
     
     
     useEffect(() => {
@@ -47,7 +50,9 @@ export default function Article() {
             <p>Votes: {currArticle.votes}</p>
             <button onClick={() => handleVote(article_id, 1)}className="greenButton">upVote</button>
             <button onClick={() => handleVote(article_id, -1)} className="redButton">downVote</button>
-            < CommentsList />
+           <button onClick={() => setToggle(true)}>Add Comment</button>
+            {toggle && <PostComment setComments={setComments} comments={comments}/>}
+            <CommentsList comments={comments} setComments={setComments}/> 
         </div>
     )
 }
