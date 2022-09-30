@@ -1,29 +1,49 @@
 import { useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios'
+import { useSearchParams } from 'react-router-dom';
 
 
-
-const ArticlesList = (props) => {
+const ArticlesList = () => {
 
 const [articles, setArticles] = useState([]);
-const { topic } = useParams();
-
+const { topic, sort } = useParams();
+const [currSort, setCurrSort] = useState("created_at");
+const [currOrder, setCurrOrder] = useState("desc")
 
 
 useEffect(() => {
-    axios.get(`https://news-app-backend123.herokuapp.com/api/articles`, {params: {topic}}).then(({data}) => {
-      
+    axios.get(`https://news-app-backend123.herokuapp.com/api/articles`, {params: {topic , sort_by: currSort, order: currOrder}}).then(({data}) => {
+      console.log(data, "data")
         setArticles(data.articles);
+    }).catch((err) => {
+      console.log(err);
     })
+
+    
    
-}, [topic])
+}, [topic, currSort, currOrder])
+
+const handleSortChange = (event) => {
+setCurrSort(event.target.value)
+}
+
+const handleOrderChange = (event) => {
+  setCurrOrder(event.target.value);
+}
+
 
  return (
       <div>
       <h1>Articles List</h1>
-    
-    
+       <select onChange={handleSortChange}>
+        <option value={"created_at"}>date</option>
+        <option value={"votes"}>votes</option>
+      </select> 
+      <select onChange={handleOrderChange}>
+        <option value="desc">Descending</option>
+        <option value="asc">Ascending</option>
+      </select>
       <ul id="otis">
         {articles.map((article) => {
         return (
