@@ -22,8 +22,6 @@ const CommentsList = () => {
      return (
           <div>
           <h1>Comments</h1>
-        
-        
           <ul>
             {comments.map((comment) => {
             return (

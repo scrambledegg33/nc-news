@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import {  postComment, getCommentsById } from '../utils/api';
 
 
+
 export default function PostComment() {
     const [author, setAuthor] = useState("tickle122");
     const [body , setBody] = useState("")
@@ -24,7 +25,7 @@ export default function PostComment() {
           return res;
         })
         setToggle(true)
-    
+        setBody("");
     } 
 
     
@@ -47,9 +48,10 @@ export default function PostComment() {
           </label>
           <br></br>
           <br></br>
-          <input type="submit" value="Submit"/>
+          <input type="submit" value="Submit" />
       </form>
       {toggle && <p>comment posted</p>}
+      
       </div>
     )
 }

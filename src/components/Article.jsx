@@ -51,7 +51,7 @@ export default function Article() {
             <button onClick={() => handleVote(article_id, -1)} className="redButton">downVote</button>
            <button onClick={() => setToggle(true)}>Add Comment</button>
             {toggle && <PostComment />}
-            <CommentsList />
+            <CommentsList /> 
         </div>
     )
 }
