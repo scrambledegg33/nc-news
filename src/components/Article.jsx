@@ -9,6 +9,7 @@ export default function Article() {
     const [currArticle, setCurrArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [toggle, setToggle] = useState(false)
+    const [comments, setComments] = useState([]);
     
     
     useEffect(() => {
@@ -50,8 +51,8 @@ export default function Article() {
             <button onClick={() => handleVote(article_id, 1)}className="greenButton">upVote</button>
             <button onClick={() => handleVote(article_id, -1)} className="redButton">downVote</button>
            <button onClick={() => setToggle(true)}>Add Comment</button>
-            {toggle && <PostComment />}
-            <CommentsList /> 
+            {toggle && <PostComment setComments={setComments} comments={comments}/>}
+            <CommentsList comments={comments} setComments={setComments}/> 
         </div>
     )
 }

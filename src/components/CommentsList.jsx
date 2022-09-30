@@ -2,9 +2,9 @@ import { useEffect, useState} from "react";
 import { getCommentsById } from "../utils/api";
 import {useParams} from 'react-router-dom';
 
-const CommentsList = () => {
+const CommentsList = ({setComments, comments}) => {
   const {article_id} = useParams();
-    const [comments, setComments] = useState([]);
+    
     const [isLoading, setIsLoading] = useState(true);
     
     
@@ -16,6 +16,7 @@ const CommentsList = () => {
       .then((data) => {
         setComments(data.comments);
           setIsLoading(false)
+     
       });
   }, [article_id]);
     

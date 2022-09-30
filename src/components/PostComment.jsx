@@ -4,7 +4,7 @@ import {  postComment, getCommentsById } from '../utils/api';
 
 
 
-export default function PostComment() {
+export default function PostComment({setComments, comments}) {
     const [author, setAuthor] = useState("tickle122");
     const [body , setBody] = useState("")
     const {article_id} = useParams();
@@ -14,18 +14,19 @@ export default function PostComment() {
 
     const handleBody = (event) => {
       const value = event.target.value;
-      console.log(value)
       setBody(value)
      }
   
     const handleSubmit = (event) => {
       event.preventDefault();
+      setBody("");
 
       postComment(article_id, author, body).then((res) => { 
+        console.log(res)
+        setComments([...comments, res.comment]);
           return res;
         })
         setToggle(true)
-        setBody("");
     } 
 
     
@@ -51,7 +52,7 @@ export default function PostComment() {
           <input type="submit" value="Submit" />
       </form>
       {toggle && <p>comment posted</p>}
-      
+      {!toggle && <p>comment box must contain text</p>}
       </div>
     )
 }
