@@ -9,6 +9,7 @@ export default function PostComment({setComments, comments}) {
     const [body , setBody] = useState("")
     const {article_id} = useParams();
     const [toggle, setToggle] = useState(false)
+    const [error, setError] = useState(false);
     
    
 
@@ -18,6 +19,7 @@ export default function PostComment({setComments, comments}) {
      }
   
     const handleSubmit = (event) => {
+      if(body != ""){
       event.preventDefault();
       setBody("");
 
@@ -27,6 +29,9 @@ export default function PostComment({setComments, comments}) {
           return res;
         })
         setToggle(true)
+      } else {
+        setError(true)
+      }
     } 
 
     
@@ -52,7 +57,10 @@ export default function PostComment({setComments, comments}) {
           <input type="submit" value="Submit" />
       </form>
       {toggle && <p>comment posted</p>}
-      {!toggle && <p>comment box must contain text</p>}
+      <p>comment box must contain text</p>
+      {error}
+      
+
       </div>
     )
 }

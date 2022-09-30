@@ -23,7 +23,7 @@ const CommentsList = ({setComments, comments}) => {
      return (
           <div>
           <h1>Comments</h1>
-          <ul>
+          <ul id="otis">
             {comments.map((comment) => {
             return (
                 <li key={comment.comment_id}><br></br>
