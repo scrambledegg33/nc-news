@@ -1,11 +1,13 @@
 import { useEffect, useState} from "react";
 import { getCommentsById } from "../utils/api";
 import {useParams} from 'react-router-dom';
+import { deleteCommentById } from "../utils/api";
 
-const CommentsList = ({setComments, comments}) => {
+const CommentsList = ({setComments, comments, user}) => {
   const {article_id} = useParams();
-    
     const [isLoading, setIsLoading] = useState(true);
+    const [isDeleted, setIsDeleted] = useState(false)
+    const [commentId, SetCommentId] = useState(0)
     
     
     useEffect(() => {
@@ -16,9 +18,23 @@ const CommentsList = ({setComments, comments}) => {
       .then((data) => {
         setComments(data.comments);
           setIsLoading(false)
-     
+          
       });
-  }, [article_id]);
+  }, [article_id, isDeleted]);
+
+    useEffect(() => {
+      if (commentId != 0){
+      deleteCommentById(commentId)
+      .then(() => {
+        setIsDeleted(true);
+      });
+    }
+    }, [commentId])
+
+  const handleDelete = (id) => {
+    SetCommentId(id)
+      setIsDeleted(false);
+    } 
     
      return (
           <div>
@@ -30,6 +46,8 @@ const CommentsList = ({setComments, comments}) => {
             <p>Comment: {comment.body}</p>
             <p>Comment Author: {comment.author}</p>
             <p>votes: {comment.votes}</p>
+            {comment.author === user[0]?
+            <button key={comment.comment_id} onClick={() => handleDelete(comment.comment_id)}>delete</button>:null}
             </li>
             )
             })}

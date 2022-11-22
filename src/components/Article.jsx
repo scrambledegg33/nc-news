@@ -3,6 +3,7 @@ import {useParams, Link} from 'react-router-dom';
 import { getArticlesById, patchArticles } from '../utils/api';
 import CommentsList from './CommentsList';
 import PostComment from './PostComment';
+import ErrorComponent from './ErrorComponent';
 
 export default function Article() {
     const {article_id} = useParams();
@@ -10,6 +11,9 @@ export default function Article() {
     const [isLoading, setIsLoading] = useState(true);
     const [toggle, setToggle] = useState(false)
     const [comments, setComments] = useState([]);
+    const [user, setUser] = useState(["tickle122"]);
+    const [error, setError] = useState(null);
+
     
     
     useEffect(() => {
@@ -20,7 +24,10 @@ export default function Article() {
         .then((data) => {
             setCurrArticle(data.article);
             setIsLoading(false)
-        });
+        })
+        .catch((err) => {
+            setError({ err });
+          });
     }, [article_id]);
 
     const handleVote = (article_id, vote) => {
@@ -35,9 +42,13 @@ export default function Article() {
     
 
   
-    if (isLoading){
-        return <p>Loading...</p>
-    }
+     if (isLoading){
+        return <div>
+            {error?<ErrorComponent />:<p>Loading...</p>}
+            </div>
+     }
+
+    
 
     return (
         <div>
@@ -52,7 +63,7 @@ export default function Article() {
             <button onClick={() => handleVote(article_id, -1)} className="redButton">downVote</button>
            <button onClick={() => setToggle(true)}>Add Comment</button>
             {toggle && <PostComment setComments={setComments} comments={comments}/>}
-            <CommentsList comments={comments} setComments={setComments}/> 
+            <CommentsList comments={comments} setComments={setComments} user={user} setUser={setUser}/> 
         </div>
     )
 }

@@ -10,6 +10,7 @@ import UsersList from './components/UsersList';
 import Article from './components/Article';
 import { BrowserRouter } from 'react-router-dom';
 import PostComment from './components/PostComment';
+import ErrorComponent from './components/ErrorComponent';
 
 function App() {
   //const value = useContext(UserContext);
@@ -27,6 +28,7 @@ function App() {
       <Route path="/articles/topics/:topic" element={<ArticlesList />} />
       <Route path="/artices/sortByDate" element={<ArticlesList/>} />
       <Route path="/articles/:article_id/comments/addComment" element={<PostComment />} />
+      <Route path="*" element={<ErrorComponent />} />
     </Routes> 
     <footer>
      <LoginStatus /> 

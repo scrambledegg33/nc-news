@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import {UserContext} from '../contexts/User';
-import { getUsers } from '../utils/api';
+import ErrorComponent from "./ErrorComponent";
 
 const UsersList = () => {
 
 const [users, setUsers] = useState([]);
-
+const [error, setError] = useState(null);
 
 useEffect(() => {
     fetch(`https://news-app-backend123.herokuapp.com/api/users`).then((response) => {
@@ -15,13 +14,20 @@ useEffect(() => {
         
         setUsers(data.users)
     })
+    .catch((err) => {
+      setError({ err });
+    });
 }, [])
+
+if (error) {
+  return <ErrorComponent />;
+}
 
 
     return (
       <div>
       <h1>User List</h1>
-      <ul>
+      <ul id="otis">
         {users.map((user) => {
         return (
             <li key={user.username}>

@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios'
-import { useSearchParams } from 'react-router-dom';
+import ErrorComponent from "./ErrorComponent";
 
 
 const ArticlesList = () => {
@@ -10,19 +10,18 @@ const [articles, setArticles] = useState([]);
 const { topic, sort } = useParams();
 const [currSort, setCurrSort] = useState("created_at");
 const [currOrder, setCurrOrder] = useState("desc")
+const [error, setError] = useState(null);
 
 
 useEffect(() => {
     axios.get(`https://news-app-backend123.herokuapp.com/api/articles`, {params: {topic , sort_by: currSort, order: currOrder}}).then(({data}) => {
-      console.log(data, "data")
         setArticles(data.articles);
-    }).catch((err) => {
-      console.log(err);
-    })
-
     
-   
-}, [topic, currSort, currOrder])
+    })
+    .catch((err) => {
+      setError({ err });
+    });
+    }, [topic, currSort, currOrder])
 
 const handleSortChange = (event) => {
 setCurrSort(event.target.value)
@@ -32,6 +31,10 @@ const handleOrderChange = (event) => {
   setCurrOrder(event.target.value);
 }
 
+
+if (error) {
+  return <ErrorComponent />;
+}
 
  return (
       <div>
